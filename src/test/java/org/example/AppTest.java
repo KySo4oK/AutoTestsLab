@@ -5,10 +5,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.sql.Driver;
 
 public class AppTest {
     public WebDriver driver;
@@ -46,12 +49,26 @@ public class AppTest {
     public void shouldNotRegisterUserWhenProvidedEmailNotValid() {
         driver.get("http://prom.ua/join-customer?source_id=txt.register.customer");
         driver.findElement(By.cssSelector("input[name=vertical-name]")).sendKeys("rostyslav");
-        driver.findElement(By.cssSelector("input[name=vertical-email]")).sendKeys("123email@google.com");
+        driver.findElement(By.cssSelector("input[name=vertical-email]")).sendKeys("123emailgoogle.com");
         driver.findElement(By.cssSelector("input[name=vertical-password]")).sendKeys("123");
         driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/form/div[7]/button")).click();
 
         String title = driver.getTitle();
         Assert.assertTrue(title.equals("Регистрация покупателя на сайте Prom.ua"));
+    }
+
+    @Test
+    public void shouldRegisterUserWhenProvidedEmailValid() {
+        driver.get("http://prom.ua/");
+        driver.findElement(By.linkText("зарегистрироваться")).click();
+
+        driver.findElement(By.cssSelector("input[name=vertical-name]")).sendKeys("rostyslav");
+        driver.findElement(By.cssSelector("input[name=vertical-email]")).sendKeys("122342342323@emailgoogle.com");
+        driver.findElement(By.cssSelector("input[name=vertical-password]")).sendKeys("12323");
+        driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[2]/div/form/div[7]/button")).click();
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertFalse(currentUrl.equals("http://prom.ua/join-customer?source_id=txt.register.customer"));
     }
 
     @After
