@@ -32,6 +32,17 @@ public class AppTest {
         Assert.assertTrue(title.equals("Регистрация покупателя на сайте Prom.ua"));
     }
 
+    @Test
+    public void shouldRedirectToAnotherPageWhenSearchButtonIsClicked() {
+        driver.get("http://prom.ua/");
+        driver.findElement(By.name("search_term")).sendKeys("product");
+        driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div/header/div/div/div/div/div[2]/div/div/div[1]/div/div/div/div[1]/form/div[2]")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.equals("https://prom.ua/search?search_term=product"));
+    }
+
     @After
     public void close() {
         System.out.println("Test end");
