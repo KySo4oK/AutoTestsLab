@@ -20,9 +20,7 @@ public class SearchTest {
     public void SetUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--single-process");
+        options.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
         driver = new ChromeDriver(options);
     }
 
