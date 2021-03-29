@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +19,10 @@ public class SearchTest {
     @Before
     public void SetUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        driver = new ChromeDriver(options);
     }
 
     @Test
