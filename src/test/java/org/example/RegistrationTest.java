@@ -1,5 +1,6 @@
 package org.example;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.example.pages.HomePage;
 import org.example.pages.RegistrationPage;
 import org.junit.After;
@@ -29,6 +30,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @Ignore
     public void shouldRegisterUserWhenProvidedEmailValid() {
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         homePage.open();
