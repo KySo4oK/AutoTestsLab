@@ -20,6 +20,7 @@ public class SearchTest {
     public void SetUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--single-process");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
