@@ -29,6 +29,23 @@ public class RegistrationTest {
         driver = new ChromeDriver(options);
     }
 
+    @Test
+    @Ignore
+    public void shouldRegisterUserWhenProvidedEmailValid() {
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        homePage.open();
+        homePage.goToRegistrationPage();
+
+        RegistrationPage registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
+        registrationPage.fillCorrectName();
+        registrationPage.fillCorrectEmail();
+        registrationPage.fillCorrectPassword();
+        registrationPage.submit();
+        String currentUrl = registrationPage.getCurrentUrl();
+
+        assertEquals(CABINET_USER_SETTINGS, currentUrl);
+    }
+
 
     @Test
     public void shouldNotRegisterUserWhenProvidedPasswordLessFourSymbols() {
